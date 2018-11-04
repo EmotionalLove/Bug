@@ -11,7 +11,13 @@ public class BugEntity {
      * The 1-dimensional position of the bug
      */
     private int position;
-    private EntityTurnHelper turnHelper;
+    /**
+     * Our turn helper
+     */
+    protected EntityTurnHelper turnHelper;
+    /**
+     * A unique identifer that we could use to register and manage multiple bugs at once.
+     */
     private UUID identifier;
 
     public BugEntity(int startingPos) {
@@ -20,6 +26,9 @@ public class BugEntity {
         this.turnHelper = new EntityTurnHelper();
     }
 
+    /**
+     * Prints this bug's position
+     */
     public void printEntityPosition() {
         System.out.println("The bug " + identifier.toString() + " is at " + position);
     }
@@ -33,6 +42,14 @@ public class BugEntity {
         }
         else {
             position++;
+        }
+    }
+    public void move(int amt) {
+        if (turnHelper.isTurning()) {
+            position -= amt;
+        }
+        else {
+            position += amt;
         }
     }
 
